@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #FAF9F7;
+  --color-cream-dark: #F2F0EC;
+  --color-charcoal: #1C1C1C;
+  --color-charcoal-light: #2E2E2E;
+  --color-taupe: #B8977E;
+  --color-taupe-light: #D4C4B0;
+  --color-muted: #878787;
+  --color-border: #E6E3DE;
+  --color-surface: #FFFFFF;
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-outfit);
+}
+
+/* Tailwind v4 preflight handles the reset */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-taupe);
+  color: white;
+}
+
+/* Elegant underline animation for links */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-charcoal);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-taupe-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-taupe);
+}
