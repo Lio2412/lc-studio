@@ -20,6 +20,18 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Verrouiller le scroll du body quand le menu mobile est ouvert
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <>
       <motion.nav
@@ -27,9 +39,11 @@ export default function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-cream/90 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
+          mobileOpen
+            ? "bg-cream border-b border-border"
+            : scrolled
+              ? "bg-cream/90 backdrop-blur-md border-b border-border"
+              : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-5 lg:px-8">
@@ -87,7 +101,7 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-cream/98 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-cream backdrop-blur-sm md:hidden"
           >
             {navLinks.map((link, i) => (
               <motion.a
